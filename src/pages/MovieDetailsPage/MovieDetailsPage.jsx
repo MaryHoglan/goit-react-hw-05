@@ -18,11 +18,13 @@ export default function MovieDetailsPage() {
       });
   }, [movieId, navigate]);
 
-  if (!movie) return <div>Loading movie details...</div>;
+  if (!movie) {   
+    return <div>Loading movie details...</div>;
+  }
 
   const posterUrl = movie.poster_path
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
-    : 'https://via.placeholder.com/300x450?text=No+Image';
+    : 'https://placehold.co/300x450?text=No+Poster&font=roboto';
   
   const genres = movie.genres?.map(genre => genre.name).join(', ') || 'N/A';
 

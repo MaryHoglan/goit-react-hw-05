@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-//const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNjBlZjUyMTRkMGI0ZmYxYjliMjE0MzM2ZDBkMjFiYiIsIm5iZiI6MS43NDczMTQ4Mzc0NzgwMDAyZSs5LCJzdWIiOiI2ODI1ZTg5NTYwY2M5MzQ0MTIzMTU4ZWYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.3lSk3tLukBpCWG8vEUqsNlZEnk9vOEJEif7um4uHzRM '
+
 const accessToken = import.meta.env.VITE_API_TOKEN;
-console.log('Token:', accessToken);
 const options = {
   headers: {
     Authorization: `Bearer ${accessToken}`,

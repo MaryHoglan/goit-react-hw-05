@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from '../../services/tmdbApi';
 import css from './MovieCast.module.css';
+import { IMAGE_BASE_URL } from '../../services/imageBaseUrl';
 
 export default function MovieCast() {
   const { movieId } = useParams();
@@ -21,8 +22,8 @@ export default function MovieCast() {
     <ul className={css.castList}>
       {cast.slice(0, 10).map(actor => {
         const imgUrl = actor.profile_path
-          ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
-          : 'https://via.placeholder.com/300x450?text=No+Image';
+          ? `${IMAGE_BASE_URL}${actor.profile_path}`
+          : 'https://placehold.co/300x450?text=No+Poster&font=roboto';
 
         return (
           <li key={actor.cast_id || actor.credit_id} className={css.castItem}>

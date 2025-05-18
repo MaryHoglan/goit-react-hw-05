@@ -1,30 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { searchMovies } from '../../services/tmdbApi';
+import { useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
 
 export default function MoviesPage() {
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';  
+  const [inputValue, setInputValue] = useState(query); 
+
+  
+  useEffect(() => {
+    if (!query) {
+      setMovies([]);
+      return;
+    }
+
+    async function fetchMovies() {
+      try {
+        const results = await searchMovies(query);
+        setMovies(results);
+        setError(null);
+      } catch (err) {
+        setError(err);
+      }
+    }
+    fetchMovies();
+  }, [query]);
 
   const handleChange = e => {
-    setQuery(e.target.value);
+    setInputValue(e.target.value);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    if (!query.trim()) {
+    const trimmedQuery = inputValue.trim();
+
+    if (!trimmedQuery) {
       alert('Please enter a search query');
       return;
     }
-    try {
-      const results = await searchMovies(query);
-      setMovies(results);
-      setError(null);
-    } catch (err) {
-      setError(err);
-    }
+
+    
+    setSearchParams({ query: trimmedQuery });
   };
 
   return (
@@ -33,7 +53,7 @@ export default function MoviesPage() {
       <form onSubmit={handleSubmit} className={css.searchForm}>
         <input
           type="text"
-          value={query}
+          value={inputValue}
           onChange={handleChange}
           placeholder="Enter movie title"
           className={css.searchInput}
@@ -42,6 +62,12 @@ export default function MoviesPage() {
       </form>
 
       {error && <p className={css.errorMessage}>{error.message}</p>}
+
+      
+      {!error && query && movies.length === 0 && (
+        <p className={css.notFoundMessage}>Movie not found.</p>
+      )}
+
       <MovieList movies={movies} />
     </div>
   );
