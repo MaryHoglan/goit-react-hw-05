@@ -1,0 +1,41 @@
+.container {
+    min-height: 100vh;
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #A78BFA;
+    
+}
+
+.text {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #CCC;
+}
+
+.link {
+    font-size: 1.2rem;
+    color: #2DD4BF;
+   
+    text-decoration: none;
+    border: 2px solid #2DD4BF;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.link:hover {
+    background-color: #2DD4BF;
+    color: #121212;
+}

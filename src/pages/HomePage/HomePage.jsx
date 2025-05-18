@@ -1,36 +1,30 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
 import { fetchTrendingMovies } from "../../services/tmdbApi";
-  
+import MovieList from '../../components/MovieList/MovieList';
+import css from './HomePage.module.css';
+
 export default function HomePage() {
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
-    
-    useEffect(() => {
-        fetchTrendingMovies()
-            .then(data => {
-                setMovies(data);
-            })
-            .catch(error => {
-                setError(error);
-            });
-    }, []);
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
 
-    if (error) {
-        return <div>{error.message}</div>;
-    }
+  useEffect(() => {
+    fetchTrendingMovies()
+      .then(data => {
+        setMovies(data);
+      })
+      .catch(error => {
+        setError(error);
+      });
+  }, []);
 
-    return (
-    <div>
-        <h1>Trending today</h1>
-        <ul>
-            {movies.map(movie => (
-                <li key={movie.id}>
-                    <Link to={`/movies/${movie.id}`}>
-                        {movie.title}</Link>
-                </li>
-            ))}
-        </ul>
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  return (
+    <div className={css.homePage}>
+      <h1>Trending today</h1>
+      <MovieList movies={movies} />
     </div>
   );
 }

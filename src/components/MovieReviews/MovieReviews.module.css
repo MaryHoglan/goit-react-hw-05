@@ -1,0 +1,27 @@
+/* MovieReviews.module.css */
+
+.reviewList {
+    list-style: none;
+    padding: 0;
+    color: #E0E0E0;
+}
+
+.reviewItem {
+    background-color: #1E1E1E;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.author {
+    font-weight: 600;
+    color: #FCD34D;
+    margin-bottom: 8px;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #A0A0A0;
+}

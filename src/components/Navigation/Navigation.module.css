@@ -1,0 +1,23 @@
+/* Navigation.module.css */
+
+.navbar {
+    background-color: #121212;
+    padding: 16px 24px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.navLink {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: #FCD34D;
+    text-decoration: underline;
+}

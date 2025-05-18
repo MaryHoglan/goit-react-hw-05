@@ -44,3 +44,23 @@ export async function fetchMovieDetails(movieId) {
     }
 
 }
+
+export async function fetchMovieCast(movieId) {
+  try {
+    const response = await axios.get(`${MOVIE_DETAILS}${movieId}/credits`, options);
+    return response.data.cast;  
+  } catch (error) {
+    console.error('Error fetching movie cast:', error);
+    throw error;
+  }
+}
+
+export async function fetchMovieReviews(movieId) {
+  try {
+    const response = await axios.get(`${MOVIE_DETAILS}${movieId}/reviews`, options);
+    return response.data.results; 
+  } catch (error) {
+    console.error('Error fetching movie reviews:', error);
+    throw error;
+  }
+}
