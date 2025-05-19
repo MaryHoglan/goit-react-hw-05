@@ -1,5 +1,5 @@
 import { Link, Outlet, useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { fetchMovieDetails } from '../../services/tmdbApi';
 import { IMAGE_BASE_URL } from '../../services/imageBaseUrl';
 import css from './MovieDetailsPage.module.css';
@@ -9,6 +9,8 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+ const backLinkRef = useRef(location.state?.from || '/');
 
   useEffect(() => {
     fetchMovieDetails(movieId)
@@ -30,7 +32,7 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <button className={css.backButton} onClick={() => navigate(location?.state?.from || '/')}>Go Back</button>
+      <button className={css.backButton} onClick={() => navigate(backLinkRef.current)}>Go Back</button>
 
       <div className={css.container}>
         <img className={css.poster} src={posterUrl} alt={movie.title} />
@@ -44,8 +46,8 @@ export default function MovieDetailsPage() {
       </div>
 
       <div className={css.links}>
-        <Link to="cast" state={{ from: location.state?.from }}>Cast</Link>
-        <Link to="reviews" state={{ from: location.state?.from }}>Reviews</Link>
+        <Link to="cast" state={{ from: backLinkRef.current }}>Cast</Link>
+        <Link to="reviews" state={{ from: backLinkRef.current }}>Reviews</Link>
       </div>
 
       <Outlet />
