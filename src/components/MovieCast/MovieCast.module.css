@@ -6,7 +6,11 @@
     gap: 20px;
     color: #E0E0E0;
 }
-
+@media (max-width: 768px) {
+    .castList {
+justify-content: space-evenly;
+    }
+}
 .castItem {
     background-color: #1E1E1E;
     border-radius: 12px;

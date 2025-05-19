@@ -20,7 +20,7 @@ export default function MovieCast() {
 
   return (
     <ul className={css.castList}>
-      {cast.slice(0, 10).map(actor => {
+      {cast.slice(0, 9).map(actor => {
         const imgUrl = actor.profile_path
           ? `${IMAGE_BASE_URL}${actor.profile_path}`
           : 'https://placehold.co/300x450?text=No+Poster&font=roboto';
